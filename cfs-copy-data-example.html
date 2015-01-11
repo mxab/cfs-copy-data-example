@@ -1,0 +1,30 @@
+<head>
+    <title>cfs-copy-data-example</title>
+</head>
+
+<body>
+{{> gallery}}
+</body>
+
+<template name="gallery">
+    <label>Upload <input type="file"></label>
+    <hr>
+    <button class="js-copy" type="button">Copy to Store2</button>
+    <hr>
+    <ul>
+        {{#each images}}
+            <li>
+                <div>
+                    {{#with FS.GetFile "images" _id}}
+                        <img src="{{this.url store='store1'}}" alt="">
+                    {{/with}}
+                </div>
+                <div>
+                    {{#with FS.GetFile "images" _id}}
+                        <img src="{{this.url store='store2'}}" alt="">
+                    {{/with}}
+                </div>
+            </li>
+        {{/each}}
+    </ul>
+</template>

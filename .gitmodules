@@ -1,0 +1,3 @@
+[submodule "packages/cfs:file"]
+	path = packages/cfs:file
+	url = https://github.com/mxab/Meteor-cfs-file.git
