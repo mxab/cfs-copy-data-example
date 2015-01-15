@@ -11,3 +11,4 @@ cfs:standard-packages
 cfs:filesystem
 cfs:ui
 cfs:graphicsmagick
+cfs:s3

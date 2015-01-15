@@ -1,4 +1,7 @@
+//change this flag to add second store
 var STORE2 = false;
+
+
 var transformWrite = function (fileObj, readStream, writeStream) {
   gm(readStream, fileObj.name()).resize('128', '128').stream().pipe(writeStream);
 };
@@ -12,7 +15,7 @@ if (STORE2) {
   stores.push(new FS.Store.FileSystem("store2", {
     path: "~/uploads/store2",
     transformWrite: transformWrite
-  }))
+  }));
 }
 
 var Images = new FS.Collection("images", {
@@ -22,8 +25,8 @@ var Images = new FS.Collection("images", {
 if (Meteor.isClient) {
 
   Template.gallery.helpers({
-    store2: function () {
-      return STORE2;
+    store2Disabled: function () {
+      return !STORE2;
     },
     images: function () {
       return Images.find();
@@ -32,13 +35,12 @@ if (Meteor.isClient) {
 
   Template.gallery.events({
     'change input[type=file]': FS.EventHandlers.insertFiles(Images),
-    "click .js-copy": function () {
+    "click .js-copy-to-store2": function () {
       if (!STORE2) {
         alert("enable STORE2 flag")
       } else {
         Meteor.call("copy");
       }
-
     }
   });
 }
