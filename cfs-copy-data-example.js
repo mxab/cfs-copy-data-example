@@ -41,15 +41,22 @@ if (Meteor.isClient) {
       } else {
         Meteor.call("copy");
       }
+    },
+    "click .js-move-to-store2": function () {
+      if (!STORE2) {
+        alert("enable STORE2 flag")
+      } else {
+        Meteor.call("copy", true);
+      }
     }
   });
 }
 if (Meteor.isServer) {
   Meteor.methods({
-    "copy": function () {
+    "copy": function (move) {
       console.log("copy file");
       Images.find().forEach(function (fileObj) {
-        fileObj.copyData("store1", "store2");
+        fileObj.copyData("store1", "store2",move);
       })
     }
   })
